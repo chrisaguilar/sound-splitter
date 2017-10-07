@@ -2,9 +2,10 @@
 
 ## Instructions
 
-1. Get some audio files.
-2. Configure `setup.json`
-3. Run `splitSounds.js`
+1. Install `ffmpeg`
+2. Get some audio files.
+3. Configure `setup.json`
+4. Run `splitSounds.js`
 
 ## `setup.json` Structure
 ```json

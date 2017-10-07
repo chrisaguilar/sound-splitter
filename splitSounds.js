@@ -4,24 +4,22 @@ const { extname, resolve } = require('path');
 const setup = require('./setup.json');
 
 // Loop through each input file in setup.json
-for (const file of Object.keys(setup)) {
-    // Get the input file and the output directory
-    const input = file;
-    const outdir = setup[file].outdir;
+for (const infile of Object.keys(setup)) {
+    // Get the output directory and track splits for each input file
+    const { outdir, splits } = setup[infile];
 
-    // Get file extension of the input file (e.g. .opus, .ogg, .mp3, etc.)
-    const extension = extname(input);
+    // Get file extension of the input file
+    const extension = extname(infile);
 
     // Loop over the split list
-    for (const split of setup[file].splits) {
+    for (const split of splits) {
+        // Get the start and end times, as well as the title
+        const { end, start, title } = split;
 
         // The output file for each split will be <outdir><title><extension>
-        const title = resolve(outdir, `${split.title}${extension}`);
-
-        // Get the start and end times
-        const { start, end } = split;
+        const outfile = resolve(outdir, `${title}${extension}`);
 
         // Use ffmpeg to extract the audio
-        execSync(`ffmpeg -i "${input}" -acodec copy -to "${end}" -ss "${start}" "${title}"`);
+        execSync(`ffmpeg -i "${infile}" -acodec copy -to "${end}" -ss "${start}" "${outfile}"`);
     }
 }
