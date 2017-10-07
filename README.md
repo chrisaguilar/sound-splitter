@@ -45,6 +45,7 @@
 2. Change the input file in `setup.json` to `/path/to/downloaded/file.ext`
 3. `$ mkdir /home/whatever/directory`
 4. Change the output directory in `setup.json` to `/home/whatever/directory`
-5. `$ node splitSounds.js`
+5. Configure the splits
+6. `$ node splitSounds.js`
 
 That's it. Have fun!
